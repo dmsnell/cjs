@@ -117,7 +117,7 @@ describe( 'List', () => {
 				const l2 = List( 2 )
 				const l3 = List( 3 )
 
-				expect( mappend( l1, mappend( l2, l3 ) ).value ).to.eql( mappend( mappend( l1, l2 ), l3 ).value )mappend( l3 ) ) ).value )
+				expect( mappend( l1, mappend( l2, l3 ) ).value ).to.eql( mappend( mappend( l1, l2 ), l3 ).value )
 			} )
 		} )
 	} )
