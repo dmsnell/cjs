@@ -66,6 +66,16 @@ describe( 'List', () => {
 
 				expect( l1.mappend( l2 ).value ).to.eql( { head: 1, tail: { head: 2, tail: { head: 3, tail: { head: 4, tail: null } } } } )
 			} )
+
+			it( 'should hold associativity', () => {
+				const l1 = List( 1 )
+				const l2 = List( 2 )
+				const l3 = List( 3 )
+
+				expect( l1.mappend( l2 ).mappend( l3 ).value, 'a+b+c = (a+b)+c' ).to.eql( ( l1.mappend( l2 ) ).mappend( l3 ).value )
+				expect( l1.mappend( l2 ).mappend( l3 ).value, 'a+b+c = a+(b+c)' ).to.eql( l1.mappend( ( l2.mappend( l3 ) ) ).value )
+				expect( ( l1.mappend( l2 ) ).mappend( l3 ).value, '(a+b)+c = a+(b+c)' ).to.eql( l1.mappend( ( l2.mappend( l3 ) ) ).value )
+			} )
 		} )
 	} )
 } )
