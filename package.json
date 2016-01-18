@@ -1,0 +1,25 @@
+{
+  "name": "cjs",
+  "version": "1.0.0",
+  "description": "Categorical enhancements to JavaScript",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "babel-node ./test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmsnell/cjs.git"
+  },
+  "author": "Dennis Snell <dennis.snell@automattic.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dmsnell/cjs/issues"
+  },
+  "homepage": "https://github.com/dmsnell/cjs#readme",
+  "devDependencies": {
+    "chai": "3.4.1"
+  }
+}
