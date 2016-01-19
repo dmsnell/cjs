@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 
 import {
+	Instance,
 	compose, partial,
 	head, tail, take
 } from '../lib/prelude.js'
@@ -9,6 +10,36 @@ import List from '../lib/list.js'
 const l = console.log
 
 describe( 'Prelude', () => {
+	describe( 'type classing', () => {
+		function Monoid() { this.value = null }
+		Monoid.prototype.mempty = function() { return this }
+		Monoid.prototype.mappend = function() { return this }
+
+		it( 'should add the provided methods', () => {
+			function Sum( v ) { this.value = v }
+			Instance( Monoid, Sum, {
+				mempty () { return new Sum( 0 ) },
+				mappend( s2 ) { return new Sum( this.value + s2.value ) }
+			} )
+
+			const s = new Sum()
+
+			expect( s.mempty().value, 'mempty' ).to.eql( 0 )
+			expect( s.mappend, 'mappend' ).to.be.a( 'function' )
+		} )
+
+		it( 'should throw a TypeError if missing a method', () => {
+			function Sum( v ) { this.value = v }
+			const createInstance = function() {
+				Instance( Monoid, Sum, {
+					get mempty () { return new Sum( 0 ) }
+				} )
+			}
+
+			expect( createInstance ).to.throw( TypeError )
+		} )
+	} )
+
 	describe( 'functions', () => {
 		describe( 'compose', () => {
 			const inc = a => a + 1
